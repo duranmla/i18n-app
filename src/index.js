@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 
+import Polyglot from 'node-polyglot';
+import locale from './locales/locale';
 import TranslationsProvider from './providers/TranslationsProvider';
 
-const translations = {
-  welcome_message: 'Hello World!'
-};
+let translations = new Polyglot();
+translations.extend(locale.en);
 
 ReactDOM.render(
   <TranslationsProvider translations={translations}>
