@@ -1,6 +1,6 @@
 import React, { Component, PropTypes, Children } from "react"
 
-class i18nProvider extends Component {
+class TranslationsProvider extends Component {
   static propTypes = {
     translations: PropTypes.object.isRequired,
   }
@@ -20,4 +20,4 @@ class i18nProvider extends Component {
   }
 }
 
-export default i18nProvider;
+export default TranslationsProvider;
