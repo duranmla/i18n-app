@@ -14,16 +14,11 @@ const store = createStore(
 );
 
 // translations
-import Polyglot from 'node-polyglot';
-import locale from './locales/locale';
 import TranslationsProvider from './providers/TranslationsProvider';
-
-let translations = new Polyglot();
-translations.extend(locale.en);
 
 ReactDOM.render(
   <Provider store={store}>
-    <TranslationsProvider translations={translations}>
+    <TranslationsProvider>
       <App />
     </TranslationsProvider>
   </Provider>,

@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import Translations from './hocs/Translations'
+import Translations from './hocs/Translations';
+import Button from './Button';
 
 class App extends Component {
   render() {
@@ -17,6 +18,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <Button language="es" />
+        <Button language="en" />
       </div>
     );
   }
