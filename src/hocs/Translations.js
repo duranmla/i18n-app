@@ -1,7 +1,8 @@
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
+import PropTypes from 'prop-types';
 
 const Translations = (ComponentToWrap) => {
-  return class i18nComponent extends Component {
+  return class TranslationsComponent extends Component {
     static contextTypes = {
       translations: PropTypes.object.isRequired,
     }

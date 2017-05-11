@@ -1,13 +1,10 @@
-import React, { Component, PropTypes, Children } from 'react';
+import { Component, Children } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import locale from '../locales/locale';
 import Polyglot from 'node-polyglot';
 
 class TranslationsProvider extends Component {
-  static propTypes = {
-    translations: PropTypes.object.isRequired,
-  }
-
   static childContextTypes = {
     translations: PropTypes.object.isRequired,
   }
@@ -15,8 +12,10 @@ class TranslationsProvider extends Component {
   getChildContext() {
     const { language } = this.props;
 
-    let translations = new Polyglot();
-    translations.extend(locale[language]);
+    const translations = new Polyglot({
+      locale: language,
+      phrases: locale[language]
+    });
 
     return { translations };
   }
