@@ -1,23 +1,37 @@
 import { Component, Children } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import locale from '../locales/locale';
-import Polyglot from 'node-polyglot';
+import EventEmitter from '../EventEmitter';
+import Translations from '../locales/Translations';
 
 class TranslationsProvider extends Component {
   static childContextTypes = {
-    translations: PropTypes.object.isRequired,
+    translations: PropTypes.func.isRequired,
   }
 
   getChildContext() {
-    const { language } = this.props;
+    /*
+      Everytime the props or state change we will update
+      the translations by updating the stringHandler within the
+      Translations class
+     */
+    Translations.loadTranslations(this.props.language);
 
-    const translations = new Polyglot({
-      locale: language,
-      phrases: locale[language]
-    });
+    /*
+      Send the "Translations" class as an immutable entity in the
+      child context to be able to get the last locale within the children
+     */
+    return { translations: Translations };
+  }
 
-    return { translations };
+  componentDidUpdate(prevProps) {
+    /*
+      Update the elements with translations only if the language
+      has actually changed.
+     */
+    if (this.props.language !== prevProps.language) {
+      EventEmitter.trigger();
+    }
   }
 
   render() {
